@@ -1,0 +1,7 @@
+package com.kllama.sunmoon.models
+
+enum class ShuttleType {
+    WEEKDAY_TRAIN, WEEKDAY_TERMINAL, WEEKDAY_ONYANG,
+    WEEKEND_TRAIN, WEEKEND_TERMINAL,
+    SUNDAY_TRAIN, SUNDAY_TERMINAL
+}
