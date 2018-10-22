@@ -1,6 +1,7 @@
-package com.kllama.sunmoon.parser
+package com.kllama.sunmoon.core.rx
 
 import com.google.firebase.database.FirebaseDatabase
+import com.kllama.sunmoon.core.parser.ShuttleParser
 import com.kllama.sunmoon.models.ShuttleType
 import io.reactivex.CompletableEmitter
 import io.reactivex.CompletableOnSubscribe

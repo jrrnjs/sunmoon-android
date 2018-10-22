@@ -1,4 +1,4 @@
-package com.kllama.sunmoon.parser
+package com.kllama.sunmoon.core.parser
 
 import com.kllama.sunmoon.models.*
 import org.jsoup.Jsoup
@@ -15,11 +15,11 @@ class ShuttleParser {
                 .getElementsByTag("tbody")
 
         return when (type) {
-            ShuttleType.WEEKDAY_TRAIN -> parseTrainWeekday(tbody)
-            ShuttleType.WEEKEND_TRAIN, ShuttleType.SUNDAY_TRAIN -> parseTrainWeekend(tbody)
-            ShuttleType.WEEKDAY_TERMINAL -> parseTerminalWeekday(tbody)
-            ShuttleType.WEEKEND_TERMINAL, ShuttleType.SUNDAY_TERMINAL -> parseTerminalWeekend(tbody)
-            ShuttleType.WEEKDAY_ONYANG -> parseOnyangWeekday(tbody)
+            ShuttleType.TRAIN_WEEKDAY -> parseTrainWeekday(tbody)
+            ShuttleType.TRAIN_SATURDAY, ShuttleType.TRAIN_SUNDAY -> parseTrainWeekend(tbody)
+            ShuttleType.TERMINAL_WEEKDAY -> parseTerminalWeekday(tbody)
+            ShuttleType.TERMINAL_SATURDAY, ShuttleType.TERMINAL_SUNDAY -> parseTerminalWeekend(tbody)
+            ShuttleType.ONYANG_WEEKDAY -> parseOnyangWeekday(tbody)
         }
     }
 
@@ -137,15 +137,15 @@ class ShuttleParser {
 
     private fun getShuttleUrl(type: ShuttleType): String =
             when (type) {
-                ShuttleType.WEEKDAY_TRAIN -> ShuttleParser.WEEKDAY_SHUTTLE_URLS[0]
-                ShuttleType.WEEKDAY_TERMINAL -> ShuttleParser.WEEKDAY_SHUTTLE_URLS[1]
-                ShuttleType.WEEKDAY_ONYANG -> ShuttleParser.WEEKDAY_SHUTTLE_URLS[2]
+                ShuttleType.TRAIN_WEEKDAY -> ShuttleParser.WEEKDAY_SHUTTLE_URLS[0]
+                ShuttleType.TERMINAL_WEEKDAY -> ShuttleParser.WEEKDAY_SHUTTLE_URLS[1]
+                ShuttleType.ONYANG_WEEKDAY -> ShuttleParser.WEEKDAY_SHUTTLE_URLS[2]
 
-                ShuttleType.WEEKEND_TRAIN -> ShuttleParser.WEEKEND_SHUTTLE_URLS[0]
-                ShuttleType.WEEKEND_TERMINAL -> ShuttleParser.WEEKEND_SHUTTLE_URLS[1]
+                ShuttleType.TRAIN_SATURDAY -> ShuttleParser.WEEKEND_SHUTTLE_URLS[0]
+                ShuttleType.TERMINAL_SATURDAY -> ShuttleParser.WEEKEND_SHUTTLE_URLS[1]
 
-                ShuttleType.SUNDAY_TRAIN -> ShuttleParser.SUNDAY_SHUTTLE_URLS[0]
-                ShuttleType.SUNDAY_TERMINAL -> ShuttleParser.SUNDAY_SHUTTLE_URLS[1]
+                ShuttleType.TRAIN_SUNDAY -> ShuttleParser.SUNDAY_SHUTTLE_URLS[0]
+                ShuttleType.TERMINAL_SUNDAY -> ShuttleParser.SUNDAY_SHUTTLE_URLS[1]
             }
 
 

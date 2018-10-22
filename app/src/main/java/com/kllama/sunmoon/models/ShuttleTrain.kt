@@ -10,7 +10,9 @@ data class ShuttleTrainWeekday(
         val yongamTown: String,
         val asanStation2: String,
         val asanCampus2: String
-) : ShuttleTrain()
+) : ShuttleTrain() {
+    constructor() : this("", "", "", "", "", "", "")
+}
 
 data class ShuttleTrainWeekend(
         val no: String,
@@ -19,4 +21,6 @@ data class ShuttleTrainWeekend(
         val chenanStation: String,
         val asanStation2: String,
         val asanCampus2: String
-) : ShuttleTrain()
+) : ShuttleTrain() {
+    constructor() : this("", "", "", "", "", "")
+}
