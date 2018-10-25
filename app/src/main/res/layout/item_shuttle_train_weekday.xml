@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_default"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_train_weekday_textview_no"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:gravity="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/item_train_weekday_textview_asan_campus_start"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/item_train_weekday_textview_asan_station"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/item_train_weekday_textview_cheonan_station"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:textSize="10sp" />
+
+
+        <TextView
+            android:id="@+id/item_train_weekday_textview_spa_vil"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:gravity="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/item_train_weekday_textview_asan_station2"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/item_train_weekday_textview_asan_campus_arrival"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="10sp" />
+    </LinearLayout>
+</RelativeLayout>
