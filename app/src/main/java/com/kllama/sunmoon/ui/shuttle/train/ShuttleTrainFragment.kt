@@ -39,26 +39,26 @@ class ShuttleTrainFragment : BaseFragment() {
 
     private fun loadTimetable(newTimetable: List<ShuttleTrain>) {
         weekdayAdapter.newItems(newTimetable)
-        setSection()
+//        setSection()
     }
 
-    private fun setSection() {
-        when (shuttleType) {
-            ShuttleType.TRAIN_WEEKDAY -> {
-                shuttle_train_rl_weekday.visible(true)
-                shuttle_train_toolbar.title = "기차역/평일"
-            }
-            ShuttleType.TRAIN_SATURDAY -> {
-                shuttle_train_rl_weekday.visible(false)
-                shuttle_train_toolbar.title = "기차역/토요일"
-            }
-            ShuttleType.TRAIN_SUNDAY -> {
-                shuttle_train_rl_weekday.visible(false)
-                shuttle_train_toolbar.title = "기차역/일요일"
-            }
-            else -> return
-        }
-    }
+//    private fun setSection() {
+//        when (shuttleType) {
+//            ShuttleType.TRAIN_WEEKDAY -> {
+//                shuttle_train_rl_weekday.visible(true)
+//                shuttle_train_toolbar.title = "기차역/평일"
+//            }
+//            ShuttleType.TRAIN_SATURDAY -> {
+//                shuttle_train_rl_weekday.visible(false)
+//                shuttle_train_toolbar.title = "기차역/토요일"
+//            }
+//            ShuttleType.TRAIN_SUNDAY -> {
+//                shuttle_train_rl_weekday.visible(false)
+//                shuttle_train_toolbar.title = "기차역/일요일"
+//            }
+//            else -> return
+//        }
+//    }
 
     companion object {
         const val TAG = "ShuttleTrainFragment"

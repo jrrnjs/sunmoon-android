@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Sunmoon.Button.TextButton"
+        android:id="@+id/main_button_train_weekday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/train_weekday" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Sunmoon.Button.TextButton"
+        android:id="@+id/main_button_train_saturday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/train_saturday" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Sunmoon.Button.TextButton"
+        android:id="@+id/main_button_train_sunday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/train_sunday" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Sunmoon.Button.TextButton"
+        android:id="@+id/main_button_cterminal_weekday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/c_terminal_weekday" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Sunmoon.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:id="@+id/main_button_cterminal_saturday"
+        android:layout_height="wrap_content"
+        android:text="@string/c_terminal_saturday" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Sunmoon.Button.TextButton"
+        android:id="@+id/main_button_cterminal_sunday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/c_terminal_sunday" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Sunmoon.Button.TextButton"
+        android:id="@+id/main_button_yterminal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/y_terminal" />
+
+    <!--<com.google.android.material.button.MaterialButton-->
+        <!--style="@style/Widget.Sunmoon.Button.TextButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/c_campus" />-->
+
+    <View
+        android:layout_width="56dp"
+        android:layout_height="1dp"
+        android:layout_margin="16dp"
+        android:background="?android:attr/textColorPrimary" />
+
+
+</merge>

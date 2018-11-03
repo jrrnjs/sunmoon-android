@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">sunmoon</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
     <string name="no">순</string>
     <string name="asan_campus_start">아산캠퍼스\n(출발)</string>
     <string name="asan_station">아산역\n(KTX)</string>
@@ -10,4 +11,12 @@
     <string name="h_spa">하이렉스파\n건너편</string>
     <string name="yongam_vil">용암마을</string>
     <string name="asan_campus_arrival">아산캠퍼스\n(도착)</string>
+    <string name="train_weekday">기차역 평일</string>
+    <string name="train_saturday">기차역 토요일</string>
+    <string name="train_sunday">기차역 일요일</string>
+    <string name="c_terminal_weekday">천안터미널 평일</string>
+    <string name="c_terminal_saturday">천안터미널 토요일</string>
+    <string name="c_terminal_sunday">천안터미널 일요일</string>
+    <string name="y_terminal">온양터미널</string>
+    <string name="c_campus">천안캠퍼스</string>
 </resources>

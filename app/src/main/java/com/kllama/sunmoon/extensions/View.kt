@@ -14,6 +14,10 @@ infix fun View.onClick(body: () -> Unit) {
     this.setOnClickListener { body() }
 }
 
+infix fun View.onClick(body: (View) -> Unit) {
+    this.setOnClickListener { body(it) }
+}
+
 infix fun Toolbar.onNavigationClick(body: () -> Unit) {
     this.setNavigationOnClickListener { body() }
 }
