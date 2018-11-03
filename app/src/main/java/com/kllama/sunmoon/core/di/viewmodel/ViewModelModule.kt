@@ -2,7 +2,7 @@ package com.kllama.sunmoon.core.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kllama.sunmoon.ui.shuttle.train.ShuttleTrainViewModel
+import com.kllama.sunmoon.ui.shuttle.ShuttleViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -15,6 +15,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ShuttleTrainViewModel::class)
-    abstract fun bindShuttleTrainViewModel(vm: ShuttleTrainViewModel): ViewModel
+    @ViewModelKey(ShuttleViewModel::class)
+    abstract fun bindShuttleViewModel(vm: ShuttleViewModel): ViewModel
 }

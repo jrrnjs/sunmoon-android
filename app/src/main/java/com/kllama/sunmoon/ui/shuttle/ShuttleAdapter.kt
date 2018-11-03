@@ -1,4 +1,4 @@
-package com.kllama.sunmoon.ui.shuttle.train
+package com.kllama.sunmoon.ui.shuttle
 
 import android.content.Context
 import android.view.ViewGroup
@@ -6,23 +6,32 @@ import androidx.annotation.LayoutRes
 import com.kllama.sunmoon.R
 import com.kllama.sunmoon.core.platform.BaseAdapter
 import com.kllama.sunmoon.core.platform.BaseViewHolder
-import com.kllama.sunmoon.models.ShuttleTrain
-import com.kllama.sunmoon.models.ShuttleTrainWeekday
+import com.kllama.sunmoon.models.*
 import kotlinx.android.synthetic.main.item_shuttle_train_weekday.view.*
 
-class ShuttleTrainAdapter : BaseAdapter<ShuttleTrain>() {
+class ShuttleAdapter : BaseAdapter<Shuttle>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ShuttleTrain> =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Shuttle> =
             WeekdayViewHolder(parent.context, parent, R.layout.item_shuttle_train_weekday)
 
-    override fun onBindViewHolder(holder: BaseViewHolder<ShuttleTrain>, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder<Shuttle>, position: Int) {
         holder.onBindViewHolder(getItem(position))
     }
 
-    class WeekdayViewHolder(context: Context, parent: ViewGroup, @LayoutRes layoutRes: Int)
-        : BaseViewHolder<ShuttleTrain>(context, parent, layoutRes) {
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is ShuttleTrainWeekday -> 0
+            is ShuttleTrainWeekend -> 1
+            is ShuttleTerminalWeekday -> 3
+            is ShuttleTerminalWeekend -> 4
+            is ShuttleOnyang -> 5
+        }
+    }
 
-        override fun onViewCreated(item: ShuttleTrain) {
+    class WeekdayViewHolder(context: Context, parent: ViewGroup, @LayoutRes layoutRes: Int)
+        : BaseViewHolder<Shuttle>(context, parent, layoutRes) {
+
+        override fun onViewCreated(item: Shuttle) {
             if (item is ShuttleTrainWeekday) {
                 itemView.run {
                     item_train_weekday_textview_no.text = item.no

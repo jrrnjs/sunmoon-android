@@ -1,23 +1,21 @@
 package com.kllama.sunmoon.repository
 
-import com.kllama.sunmoon.core.rx.ShuttleTrainObservable
-import com.kllama.sunmoon.models.ShuttleTrain
+import com.kllama.sunmoon.core.rx.ParseShuttleOnSubscribe
+import com.kllama.sunmoon.core.rx.ReadShuttleObservable
+import com.kllama.sunmoon.models.Shuttle
 import com.kllama.sunmoon.models.ShuttleType
+import io.reactivex.Completable
 import io.reactivex.Observable
 import javax.inject.Inject
 
 interface ShuttleRepository {
 
-    fun trainWeekday(): Observable<List<ShuttleTrain>>
-    fun trainSaturday(): Observable<List<ShuttleTrain>>
-    fun trainSunday(): Observable<List<ShuttleTrain>>
+    fun readShuttle(type: ShuttleType): Observable<List<Shuttle>>
+    fun parseShuttle(type: ShuttleType): Completable
 
     class Impl @Inject constructor() : ShuttleRepository {
 
-        override fun trainWeekday(): Observable<List<ShuttleTrain>> = ShuttleTrainObservable(ShuttleType.TRAIN_WEEKDAY)
-
-        override fun trainSaturday(): Observable<List<ShuttleTrain>> = ShuttleTrainObservable(ShuttleType.TRAIN_SATURDAY)
-
-        override fun trainSunday(): Observable<List<ShuttleTrain>> = ShuttleTrainObservable(ShuttleType.TRAIN_SUNDAY)
+        override fun readShuttle(type: ShuttleType): Observable<List<Shuttle>> = ReadShuttleObservable(type)
+        override fun parseShuttle(type: ShuttleType): Completable = Completable.create(ParseShuttleOnSubscribe(type))
     }
 }

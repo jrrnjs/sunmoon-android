@@ -6,7 +6,7 @@ import com.kllama.sunmoon.models.ShuttleType
 import io.reactivex.CompletableEmitter
 import io.reactivex.CompletableOnSubscribe
 
-class ShuttleParseOnSubscribe(private val shuttleType: ShuttleType) : CompletableOnSubscribe {
+class ParseShuttleOnSubscribe(private val shuttleType: ShuttleType) : CompletableOnSubscribe {
 
     override fun subscribe(emitter: CompletableEmitter) {
         try {

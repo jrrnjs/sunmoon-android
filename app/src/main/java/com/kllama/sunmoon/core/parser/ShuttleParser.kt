@@ -23,8 +23,8 @@ class ShuttleParser {
         }
     }
 
-    private fun parseTrainWeekday(tbody: Elements): MutableList<ShuttleTrain> {
-        val result = mutableListOf<ShuttleTrain>()
+    private fun parseTrainWeekday(tbody: Elements): MutableList<Shuttle> {
+        val result = mutableListOf<Shuttle>()
 
         tbody.forEach { it ->
             it.getElementsByTag("tr").forEach { tr ->
@@ -46,8 +46,8 @@ class ShuttleParser {
         }
         return result
     }
-    private fun parseTrainWeekend(tbody: Elements): MutableList<ShuttleTrain> {
-        val result = mutableListOf<ShuttleTrain>()
+    private fun parseTrainWeekend(tbody: Elements): MutableList<Shuttle> {
+        val result = mutableListOf<Shuttle>()
 
         tbody.forEach { it ->
             it.getElementsByTag("tr").forEach { tr ->
@@ -69,8 +69,8 @@ class ShuttleParser {
         return result
     }
 
-    private fun parseTerminalWeekday(tbody: Elements): MutableList<ShuttleTerminal> {
-        val result = mutableListOf<ShuttleTerminal>()
+    private fun parseTerminalWeekday(tbody: Elements): MutableList<Shuttle> {
+        val result = mutableListOf<Shuttle>()
 
         tbody.forEach { it ->
             it.getElementsByTag("tr").forEach { tr ->
@@ -90,8 +90,8 @@ class ShuttleParser {
         }
         return result
     }
-    private fun parseTerminalWeekend(tbody: Elements): MutableList<ShuttleTerminal> {
-        val result = mutableListOf<ShuttleTerminal>()
+    private fun parseTerminalWeekend(tbody: Elements): MutableList<Shuttle> {
+        val result = mutableListOf<Shuttle>()
 
         tbody.forEach { it ->
             it.getElementsByTag("tr").forEach { tr ->
