@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">sunmoon</string>
 
-
+    <string name="select_default_page">처음화면을 고르세요</string>
+    <string name="save">저장</string>
 
 
     <string name="no">순</string>
@@ -23,4 +24,12 @@
     <string name="baebang">배방지역</string>
     <string name="o_terminal">온양터미널</string>
     <string name="o_station">온양역</string>
+    <string name="setting">설정</string>
+
+
+    <!--The shuttle schedule has been updated.-->
+    <string name="shuttle_schedule_has_been_updated">셔틀시간표를 갱신하였습니다.</string>
+    <!--Recently updated.-->
+    <string name="recently_updated">최근에 업데이트되었습니다.</string>
+
 </resources>

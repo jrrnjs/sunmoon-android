@@ -5,18 +5,22 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import com.kllama.sunmoon.R
+import com.kllama.sunmoon.core.SettingsPreferences
 import com.kllama.sunmoon.core.platform.BaseFragment
 import com.kllama.sunmoon.extensions.*
 import com.kllama.sunmoon.models.Shuttle
 import com.kllama.sunmoon.models.ShuttleType
 import kotlinx.android.synthetic.main.fragment_shuttle.*
-import timber.log.Timber
+import javax.inject.Inject
 
 
 class ShuttleFragment : BaseFragment() {
 
+    @Inject
+    lateinit var settingsPreferences: SettingsPreferences
     lateinit var viewModel: ShuttleViewModel
 
     private var shuttleType: ShuttleType = ShuttleType.TRAIN_WEEKDAY
@@ -49,7 +53,7 @@ class ShuttleFragment : BaseFragment() {
             observeOnUiThread(this@ShuttleFragment.compositeDisposable, throwable, ::handleError)
         }
 
-        setShuttleType(ShuttleType.TRAIN_WEEKDAY)
+        setShuttleType(settingsPreferences.getDefaultPage())
     }
 
     private fun newShuttle(newItems: List<Shuttle>) {
@@ -57,7 +61,7 @@ class ShuttleFragment : BaseFragment() {
     }
 
     private fun successOnParsing(any: Any) {
-        snackbar("셔틀시간표가 갱신되었습니다.")
+        snackbar(getString(R.string.shuttle_schedule_has_been_updated))
     }
 
 
@@ -70,13 +74,13 @@ class ShuttleFragment : BaseFragment() {
 
     private fun setToolbarTitle() {
         baseActivity.supportActionBar?.title = when (shuttleType) {
-            ShuttleType.TRAIN_WEEKDAY -> "기차역 평일"
-            ShuttleType.TRAIN_SATURDAY -> "기차역 토요일"
-            ShuttleType.TRAIN_SUNDAY -> "기차역 일요일"
-            ShuttleType.TERMINAL_WEEKDAY -> "터미널 평일"
-            ShuttleType.TERMINAL_SATURDAY -> "터미널 토요일"
-            ShuttleType.TERMINAL_SUNDAY -> "터미널 일요일"
-            ShuttleType.ONYANG_WEEKDAY -> "온양 평일"
+            ShuttleType.TRAIN_WEEKDAY -> getString(R.string.train_weekday)
+            ShuttleType.TRAIN_SATURDAY -> getString(R.string.train_saturday)
+            ShuttleType.TRAIN_SUNDAY -> getString(R.string.train_sunday)
+            ShuttleType.TERMINAL_WEEKDAY -> getString(R.string.c_terminal_weekday)
+            ShuttleType.TERMINAL_SATURDAY -> getString(R.string.c_terminal_saturday)
+            ShuttleType.TERMINAL_SUNDAY -> getString(R.string.c_terminal_sunday)
+            ShuttleType.ONYANG_WEEKDAY -> getString(R.string.o_terminal)
         }
     }
     fun setShuttleHeader() {
@@ -92,9 +96,28 @@ class ShuttleFragment : BaseFragment() {
 
     private fun handleError(throwable: Throwable) {
         when (throwable.message) {
-            "PARSE_ERROR" -> snackbar(throwable.cause?.message ?: "최근에 업데이트 되었습니다.")
+            "PARSE_ERROR" -> snackbar(throwable.cause?.message ?: getString(R.string.recently_updated))
         }
     }
+
+
+    private fun showDefaultSettingDialog() {
+        val items = arrayOf(
+                getString(R.string.train_weekday), getString(R.string.train_saturday), getString(R.string.train_sunday),
+                getString(R.string.c_terminal_weekday), getString(R.string.c_terminal_saturday), getString(R.string.c_terminal_sunday),
+                getString(R.string.o_terminal)
+        )
+        var selectedValue = settingsPreferences.getDefaultPage().ordinal
+
+        AlertDialog.Builder(baseActivity)
+                .setTitle(R.string.select_default_page)
+                .setSingleChoiceItems(items, selectedValue) {dialog, which ->
+                    selectedValue = which
+                }.setPositiveButton(R.string.save) { dialog, which ->
+                    settingsPreferences.setDefaultPage(ShuttleType.values()[selectedValue])
+                }.create().show()
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_shuttle, menu)
@@ -105,6 +128,10 @@ class ShuttleFragment : BaseFragment() {
         return when (item?.itemId) {
             R.id.menu_parse -> {
                 viewModel.parseShuttle(shuttleType)
+                true
+            }
+            R.id.menu_settings -> {
+                showDefaultSettingDialog()
                 true
             }
             else -> super.onOptionsItemSelected(item)

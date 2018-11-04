@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.layout_backdrop.*
 
 class MainActivity : BaseActivity(), NavigationHost {
 
-    lateinit var navigationIconClickListener: NavigationClickListener
+    private lateinit var navigationIconClickListener: NavigationClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
