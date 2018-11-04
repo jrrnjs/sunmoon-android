@@ -17,6 +17,10 @@
     <string name="c_terminal_weekday">천안터미널 평일</string>
     <string name="c_terminal_saturday">천안터미널 토요일</string>
     <string name="c_terminal_sunday">천안터미널 일요일</string>
-    <string name="y_terminal">온양터미널</string>
-    <string name="c_campus">천안캠퍼스</string>
+    <string name="c_terminal">천안터미널</string>
+    <string name="hanjeon">한국전력</string>
+    <string name="homemart">홈마트\n에브리데이</string>
+    <string name="baebang">배방지역</string>
+    <string name="o_terminal">온양터미널</string>
+    <string name="o_station">온양역</string>
 </resources>

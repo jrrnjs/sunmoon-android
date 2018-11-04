@@ -5,15 +5,14 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.cardview.widget.CardView
 import com.kllama.sunmoon.R
 import com.kllama.sunmoon.core.platform.BaseFragment
-import com.kllama.sunmoon.extensions.baseActivity
-import com.kllama.sunmoon.extensions.observeOnUiThread
-import com.kllama.sunmoon.extensions.snackbar
-import com.kllama.sunmoon.extensions.viewModel
+import com.kllama.sunmoon.extensions.*
 import com.kllama.sunmoon.models.Shuttle
 import com.kllama.sunmoon.models.ShuttleType
-import kotlinx.android.synthetic.main.fragment_shuttle_train.*
+import kotlinx.android.synthetic.main.fragment_shuttle.*
+import timber.log.Timber
 
 
 class ShuttleFragment : BaseFragment() {
@@ -23,7 +22,17 @@ class ShuttleFragment : BaseFragment() {
     private var shuttleType: ShuttleType = ShuttleType.TRAIN_WEEKDAY
     private val shuttleAdapter: ShuttleAdapter = ShuttleAdapter()
 
-    override fun layoutId(): Int = R.layout.fragment_shuttle_train
+    private val shuttleHeaders: Array<CardView> by lazy {
+        arrayOf(
+                shuttle_cardview_train_weekday_header,
+                shuttle_cardview_train_weekend_header,
+                shuttle_cardview_terminal_weekday_header,
+                shuttle_cardview_terminal_weekend_header,
+                shuttle_cardview_onyang_weekday_header
+        )
+    }
+
+    override fun layoutId(): Int = R.layout.fragment_shuttle
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,17 +40,16 @@ class ShuttleFragment : BaseFragment() {
         appComponent.inject(this)
 
         shuttle_train_recyclerview_timetable.adapter = shuttleAdapter
-        setToolbarTitle()
         setHasOptionsMenu(true)
 
 
         viewModel = viewModel(viewModelFactory) {
             observeOnUiThread(this@ShuttleFragment.compositeDisposable, shuttleObservable(), ::newShuttle)
             observeOnUiThread(this@ShuttleFragment.compositeDisposable, parseResultObservable(), ::successOnParsing)
-            observeOnUiThread(this@ShuttleFragment.compositeDisposable, throwable, Throwable::printStackTrace)
+            observeOnUiThread(this@ShuttleFragment.compositeDisposable, throwable, ::handleError)
         }
 
-        viewModel.readShuttle(shuttleType)
+        setShuttleType(ShuttleType.TRAIN_WEEKDAY)
     }
 
     private fun newShuttle(newItems: List<Shuttle>) {
@@ -50,6 +58,14 @@ class ShuttleFragment : BaseFragment() {
 
     private fun successOnParsing(any: Any) {
         snackbar("셔틀시간표가 갱신되었습니다.")
+    }
+
+
+    fun setShuttleType(type: ShuttleType) {
+        shuttleType = type
+        viewModel.readShuttle(type)
+        setToolbarTitle()
+        setShuttleHeader()
     }
 
     private fun setToolbarTitle() {
@@ -63,11 +79,21 @@ class ShuttleFragment : BaseFragment() {
             ShuttleType.ONYANG_WEEKDAY -> "온양 평일"
         }
     }
+    fun setShuttleHeader() {
+        shuttleHeaders.forEach { it.visible(false) }
+        when (shuttleType) {
+            ShuttleType.TRAIN_WEEKDAY -> shuttle_cardview_train_weekday_header.visible(true)
+            ShuttleType.TRAIN_SATURDAY, ShuttleType.TRAIN_SUNDAY -> shuttle_cardview_train_weekend_header.visible(true)
+            ShuttleType.TERMINAL_WEEKDAY -> shuttle_cardview_terminal_weekday_header.visible(true)
+            ShuttleType.TERMINAL_SATURDAY, ShuttleType.TERMINAL_SUNDAY -> shuttle_cardview_terminal_weekend_header.visible(true)
+            ShuttleType.ONYANG_WEEKDAY -> shuttle_cardview_onyang_weekday_header.visible(true)
+        }
+    }
 
-    fun setShuttleType(type: ShuttleType) {
-        shuttleType = type
-        viewModel.readShuttle(type)
-        setToolbarTitle()
+    private fun handleError(throwable: Throwable) {
+        when (throwable.message) {
+            "PARSE_ERROR" -> snackbar(throwable.cause?.message ?: "최근에 업데이트 되었습니다.")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

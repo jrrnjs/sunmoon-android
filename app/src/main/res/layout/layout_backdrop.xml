@@ -48,7 +48,7 @@
         android:id="@+id/main_button_yterminal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/y_terminal" />
+        android:text="@string/o_terminal" />
 
     <!--<com.google.android.material.button.MaterialButton-->
         <!--style="@style/Widget.Sunmoon.Button.TextButton"-->
